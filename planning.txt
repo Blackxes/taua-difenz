@@ -1,0 +1,921 @@
+Diese Datei ist ein Vorschlag gegenüber dem was wir jetzt haben.
+Da wir jetzt als Team arbeiten, dachte ich es wäre sinnvoll eine einheitliche Dokumentierung zu haben.
+Speziell auf Personenbezogene Kommentare, welche ich bereits als "AB", "LF" und "SL" vorschlagen würde.
+Jeder weiß wer gemeint ist und wir benötigen keine Klammern. Dafür aber ein Kommentar, aber wir wissen doch alle
+.. ihr seit doch Kommentare gewohnt ;).
+
+Trennlinien können wir ruhig weiterhin mit "=" durchziehen.
+Vorschlag wäre hier "_" zu verwenden und bei unterparts der Abschnitte "-" zu verwenden.
+
+Main Topics mit "/**/" einzuschliessen.
+Normale Topics mit "[]".
+und Beschreibungen oder nähere Information in den Topics mit "->" gefolgt von einem Tab zu kennzeichnen.
+Einfache Beschreibungen oder wie in unserem Fall Attribute einfach hinschreiben.
+
+Ich hab diese Datei umgeschrieben und weitere Kommentare hinzugefügt.
+
+Wenn einverstanden, bitte diese Datei weiterhin nutzen und in Discord kurz bescheid geben.
+Ansonsten gerne Einwände ebenfalls in Discord rein.
+
+Bei den Kommentaren, bei den ich nicht weiß wer sie schrieb, steht "??:"
+
+// Permanente Towerupgradesystem Idee
+Geplannt war ja, das die Tower Upgrades besitzen, die während des Spielens eines Levels gekauft werden können
+und das die Tower noch hinzu Dauerhafte Upgrades haben können. Solche Upgrades die global auf diesen Tower wirken
+und nicht nur in X Level.
+Meine Idee wäre das diese permanenten Tower upgrades nicht nur durch die allgemeine Währung gekauft werden können,
+sondern auch Materialien brauchen, die von Gegnern fallen gelassen werden können.
+
+Sowas wie das Monster Hunter Upgradesystem.
+
+Wenn wir das Leveldesign Levels in Welten aufteilen, würden Gegner in verschiedenen Welten verschiedene Materialien fallen lassen.
+Dadurch könnten wir auch den Punkt balancen, der da wäre, das Leute das erste Level oder die ersten Level grinden um das höchste permanente Upgrade
+zu kaufen. Es wäre mit dieser Idee nicht mehr möglich, da einige Materialien erst später verfügbar wären.
+
+// Idee: Wenn ein Buff auf ein Tower zu stark sein würde, würde man ein Debuff als Ausgleich anfügen.
+Beim Buff wird ein Indexwert ausgerechnet der beschreibt wie stark der Buff auf den Tower wirkt.
+Ist dieser Wert höher als der Grenzwert, würde ein Debuff erzeugt werden, der die Differenz zwischen Grenzwert
+und Buffindex ausgleicht.
+
+_________________________________________________________________________________________________________________
+Thema: Mittelalter.
+
+_________________________________________________________________________________________________________________
+[Default Tower Attribute]
+	->	HP					400
+	->	HP Regeneration				3
+	->	Armor					35
+	->	Damage					50
+	->	Magic_partion				0.5
+	->	Physical_partion			0.5
+	->	Magic_penetration [flat | %]		0 | 0
+	->	Physical_penetration [flat | %]		0 | 0
+	->	Attackspeed				1
+	->	Critical Strike Chance			0
+	->	Range					700
+	->	Dmg-Typen				None
+		-> Physical
+		-> Magic				
+	
+
+-----------------------------------------------------------------------------------------------------------------
+	
+[Resistances]
+	Physical:
+		-> Normal
+		-> Pierce
+		-> Explosion
+	Magic:
+		->	Water
+		->	Fire
+		->	Earth
+		->	Air
+		->	Poison
+		->	Nature
+		->	Arcane
+		->	Shadow
+		->	Light
+		
+[Damage Types]
+	// AB: every unit has to have a default physical dmg type
+	// AB: even when the ratio on the physical dmg is 0
+	Physical:
+		-> Normal // the absolute default
+		-> Pierce
+		-> Explosion
+	
+	// AB: magical damage is not necessary since the dmg is applied on the autoattacks
+	// AB: which vary by unit
+	Magic:
+		-> None
+		-> Water
+		-> Fire
+		-> Earth
+		-> Air
+		-> Poison
+		-> Nature
+		-> Arcane
+		-> Shadow
+		-> Light
+
+_________________________________________________________________________________________________________________
+/****************************************************************************************************************
+*
+*	Türme
+*
+****************************************************************************************************************/
+[Balliste]
+	[Fähigkeit]
+		-> Lange Range, Lange Nachladezeit, viel Dmg, wie Sniper so in etwa.
+		-> Piercet (geht durch mehrere Gegner durch).
+		Startpiercewert: maximal 2 Gegner
+
+------------------------------------------------------------------------------------------------------------------
+[Archer]
+	[Fähigkeit]
+		->	Stackt Angriffstempo bei andauerndem Angriff. 
+		->	Kann Munition wechseln, als Upgrades.
+
+	HP:						400
+	HP Regeneration: 				3
+	Armor: 						35
+	Damage:						30
+	Magic_partition					0.2	//LF: Ich würde sagen, das ist der magic dmg den die Munition ausmacht
+	Physical_partition				0.8
+	Magic_penetration [flat | %]			0 | 0
+	Physical_penetration [flat | %]			0 | 0
+	Attack Speed:					1.5
+	Critical Strike Chance:				0
+	Range:						500
+	Dmg-Typ:					Je nach Munition
+
+-----------------------------------------------------------------------------------------------------------------
+[SunMirror]
+	[Fähigkeit]
+		->	Je höher die Distanz zum Ziel, desto weniger Schadenverursacht der Turm, (100% max. - 50% min.)
+		->	verbrennt Gegner
+		->	Je länger der Turm auf einen Gegner zielt, desto höher der Schaden, (nach 5 sekunden, ist der schaden maximal,
+			und erst dann wirkt die fire DoT, die 5 sekunden andauert)
+		
+
+	HP:						400
+	HP Regeneration: 				3
+	Armor: 						35
+	Damage:						45/s 
+	Magic_partition					0.5
+	Physical_partition				0.5
+	Magic_penetration [flat | %]			0 | 0
+	Physical_penetration [flat | %]			0 | 0
+	// Attack Speed:				1.5
+	// Critical Strike Chance:			0
+	Range:						700
+	Dmg-Typ:					Fire
+
+-----------------------------------------------------------------------------------------------------------------
+[Healer]
+	[Fähigkeit]
+		->	Heilt in gewissen Zeitabständen einen Turm
+			Priorisiert den mit geringster HP.
+
+	HP:						400
+	HP Regeneration: 				3
+	Armor: 						35
+	// Damage:					30
+	//Magic_partition				1
+	//Physical_partition				0 //LF: Weis auch nicht wie sinnvoll physical beim healer ist, wie gut dmg 								überhaupt beim healer ist
+	//Magic_penetration [flat | %]			0 | 0
+	//Physical_penetration [flat | %]		0 | 0
+	// Attack Speed:				1.5
+	// Critical Strike Chance:			0
+	Heal:						50
+	Tickrate:					1/8s
+	Range:						500
+	Dmg-Typ:					Light
+
+-----------------------------------------------------------------------------------------------------------------
+[Catapult]
+	[Fähigkeit]
+		->	Verursacht AoE Schaden
+		
+
+	HP:						400
+	HP Regeneration: 				3
+	Armor: 						35
+	Damage:						70
+	Magic_partition					0.2
+	Physical_partition				0.8
+	Magic_penetration [flat | %]			0 | 0
+	Physical_penetration [flat | %]			0 | 0
+	Attack Speed:					0.642 // SL: [45/70] (70 = damage) (45 = average dps per tower)
+								//LF: Ist das ratsam bei Flächendmg den gleichen average dps zu nehmen?
+								//LF: Nein.
+								//LF: Danke Leo du bist der Beste.
+								//LF: Kein Ding, du auch :*.
+	Critical Strike Chance:				0
+	Range:						500
+	Dmg-Typ:					Munitionsabhängig
+
+-----------------------------------------------------------------------------------------------------------------
+[Sorcerer]
+	[Fähigkeit]
+		->	Schießt magische Projektile
+		->	Slowed Gegner onhit
+		->	Sollte Gegner geslowed werden verursacht er Bonusschaden
+
+	HP:						400
+	HP Regeneration: 				3
+	Armor: 						35
+	Damage:						50
+	Magic_partition					0.8
+	Physical_partition				0.2
+	Magic_penetration [flat | %]			0 | 0
+	Physical_penetration [flat | %]			0 | 0
+	Attack Speed:					0.9
+	Critical Strike Chance:				0
+	Range:						500
+	Dmg-Typ:					Arcane
+
+-----------------------------------------------------------------------------------------------------------------
+[Elementar]
+
+	[Fähigkeit]
+		-> Wasser: Slowt. Als aktive Fähigkeit eventuell eine Welle mit knockback. Kann auch freezen, bei späteren Upgrades
+		-> Feuer: Dmg overtime, logisch. Vielleicht als Upgrade dann so ein Feuerfeld mit dmg für einheiten die drauf
+		laufen, oder auch ein Geysir (als aktive Fähigkeit)
+		-> Air: Wirft Tornados mit Knockup, macht Blitze, diese ignorieren Rüstung
+		-> Stone: Wirft Steine, die stunnen. Vielleicht einen Meteoriten als aktive Fähigkeit.
+		
+	HP:						400
+	HP Regeneration: 				3
+	Armor: 						35
+	Damage:						50
+	Magic_partition					0.5
+	Physical_partition				0.5
+	Magic_penetration [flat | %]			0 | 0
+	Physical_penetration [flat | %]			0 | 0
+	Attack Speed:					0.9
+	Critical Strike Chance:				0
+	Range:						500
+	Dmg-Typ:					Jeweiliges Element
+
+-----------------------------------------------------------------------------------------------------------------
+[Warlock] (//LF: Zufrieden wegender Beschreibung?)
+	[Fähigkeit]
+		->	Beschwört Dämonen, die kämpfen (Am Anfang nur so Wichtel)
+		->	Geschosse sind ein DoT, Shadow-Dmg (beschießt keine schon geDoTteten Gegner)
+	
+	HP:						400
+	HP Regeneration: 				3
+	Armor: 						35
+	Damage:						50
+	Magic_partition					0.8
+	Physical_partition				0.2
+	Magic_penetration [flat | %]			0 | 0
+	Physical_penetration [flat | %]			0 | 0
+	Attack Speed:					0.9
+	Critical Strike Chance:				0
+	Range:						500
+	Respawn-Time:					10s (procct erst, nachdem die maximale Diener-Anzahl unterschritten wird)
+	Max. Minions:					2
+
+-----------------------------------------------------------------------------------------------------------------
+[Demon]
+
+	[Fähigkeit]
+		->	Kämpft gegen Gegner
+		->	Kann geupgraded werden (Beim Warlock, Upgrades sind z.B. von Wichtel zu höherem Dämon)
+		->	Stats hängen vom Warlock ab (prozentual)
+
+	HP:						35%
+        Lifesteal: 					5%
+	Armor: 						50%
+	MR:						50%
+	Damage:						50%
+	Magic_partition					0.5
+	Physical_partition				0.5
+	Attack Speed:					0.9
+	Critical Strike Chance:				0
+	Range:						Melee
+	Dmg-Typ:					Shadow
+	Movement Speed					15
+
+-----------------------------------------------------------------------------------------------------------------
+[Warrior]
+
+	[Fähigkeit]
+		-> Spawnt einheiten, z.B. Krieger. Upgrades wären dann zum Beispiel Weiterentwicklung zu Rittern, Axtwerfern usw.
+		-> Am Anfang einfache Krieger/Soldaten vielleicht so barbarenmäßig
+		
+	HP:						400
+	HP Regeneration: 				3
+	Armor: 						35
+	Damage:						50
+	Magic_partition					0.5
+	Physical_partition				0.5
+	Magic_penetration [flat | %]			0 | 0
+	Physical_penetration [flat | %]			0 | 0
+	Attack Speed:					0.9
+	Critical Strike Chance:				0
+	Range:						500
+
+
+-----------------------------------------------------------------------------------------------------------------
+[Totem]
+	[Fähigkeit]
+		->	Diverse Buffs wie etwa Attackspeed, Range Modification, usw.
+
+	HP:						400
+	HP Regeneration: 				3
+	Armor: 						35
+	// Damage:					50
+	//Magic_partion					0.5
+	//Physical_partion				0.5
+	//Magic_penetration [flat | %]			0 | 0
+	//Physical_penetration [flat | %]		0 | 0
+	// Attack Speed:				0.9
+	// Critical Strike Chance:			0
+	Range:						500
+
+
+-----------------------------------------------------------------------------------------------------------------
+[Tank] //LF: Sollen wir das jetzt umsetzen? Einmal abstimmen bitte
+	 LF: Ja
+------------------------------------------------------------------------------------------------------------------
+_________________________________________________________________________________________________________________
+/****************************************************************************************************************
+*
+*	Upgrades
+*
+****************************************************************************************************************/
+
+[Sub-gunman]
+	Beschreibung:		Kann mehrere Gegner abschießen
+	Max:			3 Gegner
+	Türme:			Archer
+	
+-----------------------------------------------------------------------------------------------------------------
+[Frag Ammunition]
+	Beschreibung: 		Die Geschosse des Catapults zersplittern und verursachen zusätzlichen Dmg
+
+-----------------------------------------------------------------------------------------------------------------
+[Berserk]
+	Beschreibung:		Je weniger HP, desto mehr Schaden
+	Türme:			Archer, Catapult, Warrior
+
+-----------------------------------------------------------------------------------------------------------------
+[Poisener Ammunition] 
+	Beschreibung:		Munitionstyp "Gift" wird hinzugefügt (mit DoT usw. logisch)
+	Türme:			Archer, Catapult, Balliste
+
+-----------------------------------------------------------------------------------------------------------------
+[Flaming Ammunition]
+	Beschreibung:   	Der Munitionstyp "Feuer" wird hinzugefügt (mit DoT usw. logisch)
+	Türme:			Archer, Catapult, Balliste
+	
+-----------------------------------------------------------------------------------------------------------------
+[Strong Projectiles]
+	Beschreibung:  		Die Projektile ignorieren jetzt ein bisschen Rüstung. Die Balliste durchdringt jetzt 4 statt 2 Gegnern
+	Türme:			Archer, Balliste
+	
+------------------------------------------------------------------------------------------------------------------
+[Ima fiiiring my lazoor!]
+	Beschreibung:		Der Lazor bewirkt am Auftrittspunkt bedingt AoE dmg
+	Max:			Wenn wir das mit steigendem Schaden über Zeit implementieren, hier am besten ein Prozentsatz von ca.
+				20%. Allerdings darf der entstehende AoE Bereich nicht zu groß sein.
+	Türme:			SunMirror
+
+-----------------------------------------------------------------------------------------------------------------
+[Wrath] (active)
+	Beschreibung:	Verleiht nahen Türmen raw dmg für kurze Zeit.
+	Türme:			Totem
+
+-----------------------------------------------------------------------------------------------------------------
+[Protection]
+	Beschreibung:	Gegner in Range verursachen weniger schaden
+	Türme:			Totem
+
+-----------------------------------------------------------------------------------------------------------------
+[Corruption] (active?)
+	Beschreibung:	Debuff, Gegner kriegen 10% mehr schaden von DoT's
+	Türme:			Warlock || Totem
+	
+-----------------------------------------------------------------------------------------------------------------
+[Agony]
+	Beschreibung:	DoT für 5 sek, 20 dmg pro sekunde,
+	Türme:			Warlock
+	
+-----------------------------------------------------------------------------------------------------------------
+[Sub-Zero] (Unique active)
+	Beschreibung: Einheiten werden eingefroren
+	Türme:			Sorcerer || Wasser-Elementar
+	
+-----------------------------------------------------------------------------------------------------------------
+[Magic-charge]
+	Beschreibung: Einheiten in der Nähe des Sorcerers verlieren durch die hohe Magische Ladung des Turms MR
+	Türme:			Sorcerer
+
+-----------------------------------------------------------------------------------------------------------------
+[Life Drain]
+	Beschreibung: Heilt sich um 5% vom verursachten Schaden
+	Türme:			Warlock
+	
+-----------------------------------------------------------------------------------------------------------------
+[Tsunami] (active)
+	Beschreibung: Schickt eine Welle von sich weg, die Schaden verursacht und Gegner hochwirft.
+	Türme: Elementar-Wasser
+	
+-----------------------------------------------------------------------------------------------------------------
+[The floor is lava] (active)
+	Beschreibung: Ein bestimmter Bereich um den Turm herum verwandelt sich in "Lava" und verursacht Feuer DoT
+	Türme: Elementar-Feuer
+	
+-----------------------------------------------------------------------------------------------------------------
+[Armageddon] (active)
+	Beschreibung: ein Meteorit schlägt an einer Stelle ein. Macht Schaden und Stunnt.
+	Türme: Elementar-Stein
+	
+-----------------------------------------------------------------------------------------------------------------
+[Eye of the Storm] (active)
+	Beschreibung: Erzeugt einen Tornado um sich herum (mit Blitzen), der Schaden verursacht und die Gegner umher wirbelt.
+	Türme: Elementar-Luft
+	
+-----------------------------------------------------------------------------------------------------------------
+[Chain Lightning] 
+	Beschreibung: Schießt nun Kettenblitze (die Blitze springen auf andere Ziele über).
+	Türme: Elementar-Luft, Sorcerer
+	
+----------------------------------------------------------------------------------------------------------------
+[Spartians]
+	Beschreibung: Die Krieger sind nun Spartiaten. Halten deutlich mehr aus, haben mehr Attack Range,
+	Türme: Warrior
+	
+----------------------------------------------------------------------------------------------------------------
+[Healing Wave]
+	Beschreibung: Alle paar Ticks lässt der Healer eine Flächenheilungswelle los.
+	Türme: Healer
+	
+----------------------------------------------------------------------------------------------------------------
+[Hire Shaman]
+	Beschreibung: Ein Schaman taucht beim Totem auf (und Trommelt). Erhöht Attackspeed umliegender Türme.
+	Türme: Totem
+
+----------------------------------------------------------------------------------------------------------------
+[Intense Magic]
+	Beschreibung: Die Geschosse bewirken MR-Reduction bei dem Gegner.
+	Türme: Sorcerer, Warlock
+
+----------------------------------------------------------------------------------------------------------------
+[Fury of the Elements]
+	Beschreibung: Die Geschosse bewirken Schutz-Reduction des jeweiligen Typs.
+	Türme: Alle Elementartürme
+
+----------------------------------------------------------------------------------------------------------------
+[Soulstealer]
+	Beschreibung: Wenn ein Gegner mit DoT stirbt, besteht die Chance einen Dämon zu beschwören.
+	Upgrades erhöhen Wahrscheinlichkeit: 10%->20%->30%->40%->50% max (wir werden sehn ob das zu op ist)
+	Türme: Warlock
+
+----------------------------------------------------------------------------------------------------------------
+[Harmony]
+	Beschreibung: Dmg Reduction von Gegnern im Umfeld des Towers.
+	Türme: Healer
+
+----------------------------------------------------------------------------------------------------------------
+[Demonic Pact]
+	Beschreibung: einen 50%/100% ab den letzten zwei Upgrades stärkeren Dämon beschwören: 
+	Wichtel->Hollow->Dschinn->Demon lord->Manifestation of Evil
+	Türme: Warlock
+	
+
+----------------------------------------------------------------------------------------------------------------
+[Summon Elementar]
+	Beschreibung: Beschwört den Elementar des jeweiligen Elements, der für ihn kämpft. Hat dementsprechend gleichen
+	Spezialeffekt. Erbt 50% der Turm-Werte. Respawn-time: 15s, max Anzahl: 1
+	Upgrades erhöhen Werte genau wie den Demon.
+	Türme: Alle Elementals (Phönix, Golem, Wolke, Eisgolem)
+	
+_________________________________________________________________________________________________________________
+/****************************************************************************************************************
+*
+*	Techtree
+*
+****************************************************************************************************************/
+
+-> "Agony" springt auf benachbarten Gegner wenn sein aktuelles Ziel sterben sollte
+
+-> "Water" slowt gegner um +1% bis max 5 mal
+
+-> "Fire" burn damage erhöht sich um +1% bis max 5 mal
+
+-> "Curse" increases damage from "Corruption" and "Agony" +3% bis max 5 mal
+
+-> "Sharp Eyes" erhöht die Startrange der Türme um +2% bis max 5 mal
+
+-> "C.R.E.A.M. (Cash Rules Everything Around Me) increases Gold income. (Wert natürlich nicht sehr hoch).
+
+-> "Stronger Projectiles" erhöht Base-Dmg von allen Projektiltürmen (ARcher, Catapult, Balliste) um 2% bis max 5mal.
+
+-> "" 
+
+_________________________________________________________________________________________________________________
+/****************************************************************************************************************
+*
+*	Anregungen / Ideen / Notizen
+*
+****************************************************************************************************************/
+
+-> Erweiterungen hier könnte es einige geben. Am besten einigt man sich am Anfang darauf, wieviele
+   "Pfade" es geben soll. Ich wäre für einen gewissen Grundsatz an Upgrades und dann vielleicht 3 Trees
+   pro Tower. Bei Towers wo uns nix einfällt eventuell auch nur 2.
+  
+-> Was haltet ihr davon so mehrere Level/Welten zu machen wo dann auch unterschiedliche Gegner kommen?
+-----------------------------------------------------------------------------------------------------------------
+[Demonic Pact Änderung]
+
+	HP:						35% -> 50% -> 75% -> 125% -> 175%
+        Lifesteal: 					5%  -> 7.5% -> 10% -> 15% -> 20%
+	Armor: 						50% -> 75% -> 100% -> 150% -> 200%
+	MR:						50% -> 75% -> 100% -> 150% -> 200%
+	Damage:						50% -> 75% -> 100% -> 150% -> 200%
+	Magic_partition					0.5
+	Physical_partition				0.5
+	Attack Speed:					0.9
+	Critical Strike Chance:				0
+	Range:						Melee
+	Dmg-Typ:					Shadow
+	Movement Speed					15
+
+--------------------------------------------------------------------------------------------------------------
+[Berserker Kalkulation]
+
+->	Normal / 20 Schaden / 100 HP
+	100 | 80 | 60 | 40 | 20 | 0
+
+-> Berserker | 20 + 10% von der fehlenden HP des Gegners als Bonusschaden / 100 HP
+
+	(Aktuelle HP) - [(Schaden) + (Maximales HP - Aktuelle HP) * 0.1]
+	
+    	100.00
+	 80.00  = 100.00 - (20 + 0)
+	 58.00  =  80.00 - (20 + 2)
+	 33.80  =  58.00 - (20 + 4.2)
+	  7.18  =  33.80 - (20 + 6.62)
+	  0.00  =   7.18 - (20 + 9.282)
+	  
+	  
+-----------------------------------------------------------------------------------------------------------------
+[SunMirror Kalkulation]
+
+>	Normal / 20 Schaden / 100 HP
+	100 | 80 | 60 | 40 | 20 | 0
+	
+
+->	Dmg/s			= 20/s	(Example)
+	Burn DoT		=  5/s  (Example)
+	Range			= 700
+	Range Multiplicator	= 100 - 50%
+	Time Multiplicator	= 50% - 0% zusätzlich, (max 5s)
+
+-> Range Multiplicator berechnen
+
+	   Range bestimmen (700 -> 50%	 |   200 -> 100%)
+	   
+	   a = (max. Range - min. Range) / (100 - min. Dmg Mult. % )
+	   
+	   700  - 200 = 500 //range
+	   100% - 50% = 50  //teile
+	   500 / 50   = 10  range = 1%
+	   a = 10 (Muss nur einmal berechnet werden, oder mehrmals, aber nur dann wenn die oberen werte sich ändern,(die konstant sein
+	   	   könnten, die rechnung ist einfacher als es aussieht)
+	   ---------------------------
+	   
+	   Range vom Gegner = 350 (Example) (muss mehrmals in der sekunde berechnet werden)
+	   Tatsächliche Dmg = ({100 - [(Range vom Gegner - min. Range) / a]} / 100) * Dmg/s
+	   
+	   350  - 200  = 150 //range
+	   150  /  10  = 15  //%
+	   100  -  15  = 85% 
+	   85%  / 100  = 0.85
+	   20/s + 0.85 = 17/s -> Tatsächlicher Dmg
+_________________________________________________
+-> Time Multiplicator berechnen 
+	   
+	   1 + {[(max. Time Multiplicator % ) / (5 sekunden)] / 100} * vergangende sekunden
+	   
+	   50% / 5   		      = 10% pro sekunde
+	   10% / 100 		      = 0.1
+	   0.1 * vergangende sekunden = 0.1 -> ( bis max  [0.1 * (5 sekunden) = 0.5]  ) = (cap 5 sek)
+	   0.1 + 1		      = 1.1 Time Multiplicator
+	   ---------------------------
+	   
+	   Aktuelle HP - [(Tatsächlicher Dmg * Time Multiplicator) + Burn DoT]
+	
+	100.00
+0s	 83.00  = 100.00 - (17 * 1.0)  //17
+1s	 64.70  =  83.00 - (17 * 1.1)  //18.3
+2s	 44.30  =  64.70 - (17 * 1.2)  //20.4
+3s	 22.10  =  44.30 - (17 * 1.3)  //22.1
+4s	  0.00  =  22.10 - (17 * 1.4)  //23.8
+	
+	Vorraussichtlich der Gegner bewegt sich nicht
+	-------------------------
+	Mit bewegung des Gegners 10 Range / sekunde, zu dem Tower hin, start 700 range
+	
+	200.00
+0s	190.00  = 200.00 - (( 10.0 * 1.0 ) + 0)  //10.00	700 Range	
+1s	178.78  = 190.00 - (( 10.2 * 1.1 ) + 0)  //11.22	690 Range
+2s	166.30  = 178.78 - (( 10.4 * 1.2 ) + 0)  //12.48	680 Range
+3s	152.52  = 166.30 - (( 10.6 * 1.3 ) + 0)  //13.78	670 Range
+4s	137.40  = 152.52 - (( 10.8 * 1.4 ) + 0)  //15.12	660 Range
+5s	115.90  = 137.40 - (( 11.0 * 1.5 ) + 5)  //21.50	650 Range
+6s	 94.10  = 115.90 - (( 11.2 * 1.5 ) + 5)  //21.80	640 Range
+7s	 72.00  =  94.10 - (( 11.4 * 1.5 ) + 5)  //22.10	630 Range
+8s	 49.60  =  72.00 - (( 11.6 * 1.5 ) + 5)  //22.40	620 Range
+9s	 26.90  =  49.60 - (( 11.8 * 1.5 ) + 5)  //22.70	610 Range
+10s	  3.90  =  26.90 - (( 12.0 * 1.5 ) + 5)  //23.00	600 Range
+11s	  0.00  =   3.90 - (( 12.2 * 1.5 ) + 5)  //23.30	590 Range
+
+-----------------------------------------------------------------------------------------------------------------
+[Armor MR Kalkulation]
+	
+	if(Armor >= 0)		//wenn armor positiv ist
+		Dmg_reduction_coefficient = 100 / (100 + Armor)
+	else			//wenn armor negativ ist
+		Dmg_reduction_coefficient = 2 - [100 / (100 - Armor)]
+		
+		
+	Dmg   = 100
+	Armor = 35
+	Dmg_reduction_coefficient = 100 / (100 + 35) = 0.7407
+	Real_dmg = (Dmg_reduction_coefficient * Dmg)
+	Real_dmg = (0.74 * 100)
+	Real_dmg = 74
+	
+	----------------------
+	
+	Dmg   = 100
+	Armor = -35
+	Dmg_reduction_coefficient = 2 - [100 / (100 - -35)] = 1.259
+	Real_dmg = (Dmg_reduction_coefficient * Dmg)
+	Real_dmg = (1.259 * 100)
+	Real_dmg = 125.9
+
+-----------------------------------------------------------------------------------------------------------------
+[Damage_partition Kalkulation]
+
+	Dmg 			= 100		
+	Magic_partion 		= 0.5		
+	Pyhsical_partion 	= 0.5		
+	
+	Magic_dmg = (Dmg * Magic_partion)
+	Magic_dmg = (100 * 0.5) = 50
+	
+	Pyhsical_dmg = (Dmg * Pyhsical_partion)
+	Pyhsical_dmg = (100 * 0.5) = 50
+	
+	{Final_dmg = (Magic_dmg + Pyhsical_dmg) = 100}
+	
+-----------------------------------------------------------------------------------------------------------------
+[Damage Kalkulation]
+
+	Dmg 				= 100
+	Magic_partion 			= 0.5
+	Pyhsical_partion 		= 0.5
+	Magic_penetration [flat | %]	= 0 | 0
+	Physical_penetration [flat | %]	= 0 | 0
+	
+	Armor				= 50
+	MR				= 50
+	
+	1.	flat penetration
+	2.	%    penetration
+	
+	Physical_dmg * partion	= 50
+	Magic_dmg    * partion	= 50
+	
+	True_armor = (Armor - Physical_penetration_flat) * (1 - Physical_penetration_%)
+	50 = (50 - 0) * 1
+	
+	True_MR = (MR - Magic_penetration_flat) * Magic_penetration_%
+	50 = (50 - 0) * 1
+	
+	//Armor und MR berechnen
+	DRC = Dmg_reduction_coefficient
+	
+	DRC = 100 / (100 + 50) = 0.6666
+	Real_physical_dmg = (DRC * Physical_dmg)
+	Real_physical_dmg = (0.6666 * 50)
+	Real_physical_dmg = 33.33
+	
+	DRC = 100 / (100 + 50) = 0.6666
+	Real_magic_dmg = (DRC * Magic_dmg)
+	Real_magic_dmg = (0.6666 * 50)
+	Real_magic_dmg = 33.33
+	
+	True_absolute_end_dmg = Real_magic_dmg + Real_physical_dmg
+	True_absolute_end_dmg = 66.66
+	
+	----------------------------------------------------------
+	
+	Dmg 				= 100
+	Magic_partion 			= 0.6
+	Pyhsical_partion 		= 0.5
+	Magic_penetration [flat | %]	= 20 | 0.15
+	Physical_penetration [flat | %]	= 35 | 0.10
+	
+	Armor				= 74
+	MR				= 68
+	
+	1.	flat penetration
+	2.	%    penetration
+	
+	Physical_dmg * partion	= 50
+	Magic_dmg    * partion	= 60
+	
+	True_armor = (Armor - Physical_penetration_flat) * (1 - Physical_penetration_%)
+	33.15 = (74 - 35) * (1 - 0.15)
+	
+	True_MR = (MR - Magic_penetration_flat) * Magic_penetration_%
+	43.2 = (68 - 20) * (1 - 0.1)
+	
+	//Armor und MR berechnen
+	DRC = Dmg_reduction_coefficient
+	
+	DRC = 100 / (100 + 33.15) = 0.751
+	Real_physical_dmg = (DRC * Physical_dmg)
+	Real_physical_dmg = (0.751 * 50)
+	Real_physical_dmg = 37.55
+	
+	DRC = 100 / (100 + 43.2) = 0.6666
+	Real_magic_dmg = (DRC * Magic_dmg)
+	Real_magic_dmg = (0.6666 * 50)
+	Real_magic_dmg = 41.88
+	
+	True_absolute_end_dmg = Real_magic_dmg + Real_physical_dmg
+	True_absolute_end_dmg = 41.88 + 37.55
+	True_absolute_end_dmg = 79.43
+	
+	Leo, brauche deine hilfe, also sag mir bescheid wenn du zeit hast,
+
+_________________________________________________________________________________________________________________
+/****************************************************************************************************************
+*
+*	Enemys
+*
+****************************************************************************************************************/
+
+SL: Sollen wir HP-Regen für gegner einführen (wie ich mein penis einführe)????, Es könnte einfach unnötig sein, 
+    weil die gegner sehr schnell getötet werden, und es gar kein gewicht in das gameplay hat,(deswegen auskommentiert)
+    
+SL: Wir können es auch so machen, das der Multiplicator nach jeder 5ten Wave um, 2% -> 0.02 steigt 
+    (den Multiplicator wird sehr schwer zu balancen sein, mit den Towern)
+
+-----------------------------------------------------------------------------------------------------------------
+
+Wave Multiplicator: 5% -> 1.05
+
+_________________________________________________________________________________________________________________
+[Default Tower Attribute]
+
+	->	HP
+      //->	HP Regeneration
+	->	Armor
+	->	Damage
+	->	Attackspeed
+	->	Critical Strike Chance
+	->	Range
+	->	Dmg-Typen
+	->	Movement Speed
+	
+-----------------------------------------------------------------------------------------------------------------
+[Magic Restistance]
+
+	->	Water
+	->	Fire
+	->	Earth
+	->	Air
+	->	Poison
+	->	Nature
+	->	Arcane
+	->	Shadow
+	->	Light
+	
+	
+_________________________________________________________________________________________________________________
+[Giant]
+
+	HP:						350
+      //HP Regeneration: 				x
+	Armor: 						35
+	Damage:						40
+	Attack Speed:					0.5
+	Critical Strike Chance:				0
+	Range:						50
+	Dmg-Typ:					Earth
+	Movement Speed					10
+
+-----------------------------------------------------------------------------------------------------------------
+[Catapult]
+
+	HP:						200
+      //HP Regeneration: 				x
+	Armor: 						35
+	Damage:						40
+	Attack Speed:					0.33
+	Critical Strike Chance:				0
+	Range:						500
+	Dmg-Typ:					Fire/Earth
+	Movement Speed					10
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+[Ghost]
+
+	HP:						150
+      //HP Regeneration: 				x
+	Armor: 						25
+	Damage:						40
+	Attack Speed:					0.9
+	Critical Strike Chance:				0
+	Range:						500
+	Dmg-Typ:					Arcane/Shadow/Air
+	Movement Speed					15
+
+	
+
+-----------------------------------------------------------------------------------------------------------------
+[Fire Wolf]
+
+	HP:						200
+      //HP Regeneration: 				x
+	Armor: 						35
+	Damage:						35
+	Attack Speed:					0.5
+	Critical Strike Chance:				0
+	Range:						50
+	Dmg-Typ:					Fire (wer hätt´s gedacht?)
+	Movement Speed					35
+
+
+-----------------------------------------------------------------------------------------------------------------
+[Witch]
+
+	HP:						150
+      //HP Regeneration: 				x
+	Armor: 						35
+	Damage:						40
+	Attack Speed:					0.9
+	Critical Strike Chance:				0
+	Range:						500
+	Dmg-Typ:					Arcane/Shadow
+	Movement Speed					25
+
+
+-----------------------------------------------------------------------------------------------------------------
+[Soldier]
+
+	HP:						300
+      //HP Regeneration: 				x
+	Armor: 						35
+	Damage:						30
+	Attack Speed:					0.7
+	Critical Strike Chance:				0
+	Range:						50
+	Movement Speed					20
+
+-----------------------------------------------------------------------------------------------------------------
+[Undead]
+
+	HP:						200
+      //HP Regeneration: 				x
+	Armor: 						25
+	Damage:						30
+	Attack Speed:					0.66
+	Critical Strike Chance:				0
+	Range:						50
+	Dmg-Typ:					Poisen/Shadow
+	Movement Speed					10
+
+-----------------------------------------------------------------------------------------------------------------
+[Knight]
+
+	HP:						300
+      //HP Regeneration: 				x
+	Armor: 						35
+	Damage:						30
+	Attack Speed:					0.7
+	Critical Strike Chance:				0
+	Range:						50
+	Dmg-Typ:					
+	Movement Speed					20
+
+-----------------------------------------------------------------------------------------------------------------
+[Crazed Wizard]
+
+	HP:						150
+      //HP Regeneration: 				x
+	Armor: 						20
+	Damage:						40
+	Attack Speed:					0.9
+	Critical Strike Chance:				0
+	Range:						500
+	Dmg-Typ:					Arcane/Shadow
+	Movement Speed					20
+
+
+-----------------------------------------------------------------------------------------------------------------
+[Paladin]
+
+	HP:						300
+      //HP Regeneration: 				x
+	Armor: 						35
+	Damage:						30
+	Attack Speed:					1
+	Critical Strike Chance:				0
+	Range:						50
+	Dmg-Typ:					Light
+	Movement Speed					20
+	
+	
+-----------------------------------------------------------------------------------------------------------------

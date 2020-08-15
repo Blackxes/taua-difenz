@@ -1,0 +1,9 @@
+.debugging { position: absolute; top: 10px; left: 10px; 
+	&.closed { padding: 0; }
+	.flex-v .list-item:not(:last-child) { margin-bottom: 5px; }
+	.toggle-appearance { margin-bottom: 10px; }
+}
+.debug-component { margin-bottom: 10px; padding: 10px 0; border: 2px solid #636e72; border-top: none; border-bottom: none; background: rgba(99, 110, 114, 0.5);
+	& > * { padding: 0 5px; }
+}
+.debug-component-title { padding: 5px 0; background: #636e72; color: #dfe6e9; }

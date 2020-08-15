@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "jsx": "react",
+        "module": "ESNext",
+        "outDir": "./Dist/",
+        "removeComments": true,
+        "sourceMap": true,
+        "target": "ES5",
+        "noImplicitAny": false,
+        "moduleResolution": "Node"
+    },
+    "exclude": ["node_modules"],
+    "include": ["App/**/*"]
+}

@@ -1,0 +1,105 @@
+input, select, textarea, button { margin: 0; padding: 8px 14px; width: 100%; border: none;  box-sizing: border-box; background: #fff; font-family: inherit; font-size: 16px;
+	&:active, &:focus { outline: none; }
+}
+select {
+	$transAmount: 0.85;
+
+	padding: 6px 19px 6px 14px;
+	position: relative;
+	background: transparentize($regularColor, $transAmount);
+	border: 1px solid $regularColor;
+	border-radius: 2px;
+	box-sizing: border-box;
+	
+	&.ok { border-color: $okColor; color: $okColor; background: transparentize($okColor, $transAmount); }
+	&.error { border-color: $errorColor; color: $errorColor; background: transparentize($errorColor, $transAmount); }
+	&.warning { border-color: $warningColor; color: $warningColor; background: transparentize($warningColor, $transAmount); }
+	&.info { border-color: $infoColor; color: $infoColor; background: transparentize($infoColor, $transAmount); }
+	&.submit { border-color: $submitColor; color: $submitColor; background: transparentize($submitColor, $transAmount); }
+}
+
+// input, select, .btn, button, input[type="submit"] {  }
+
+[type="submit"] { max-width: (100% / 3); align-self: flex-end; }
+
+.debug-panel { padding: 10px; position: absolute; bottom: 10px; left: 10px; background: #fff; }
+
+.btn, button, input[type="submit"] { padding: 8px 14px; border: none; outline: none;
+	span + * { margin-left: 5px; }
+	&:hover { cursor: pointer; }
+}
+
+.btn, button { background: #fff; border: 2px dashed #2d3436; text-decoration: none; transition: all 0.05s linear; box-sizing: border-box;
+	width: fit-content; color: #2d3436;
+
+	$transAmount: 0.85;
+	&-ok { border-color: $okColor; color: $okColor; background: transparentize($okColor, $transAmount); }
+	&-error { border-color: $errorColor; color: $errorColor; background: transparentize($errorColor, $transAmount); }
+	&-warning { border-color: $warningColor; color: $warningColor; background: transparentize($warningColor, $transAmount); }
+	&-info { border-color: $infoColor; color: $infoColor; background: transparentize($infoColor, $transAmount); }
+	&-submit { border-color: $submitColor; color: $submitColor; background: transparentize($submitColor, $transAmount); }
+	&-small { padding: 4px 10px; width: fit-content; box-sizing: border-box;
+		&, & * { font-size: 12px; }
+	}
+	&-wide {
+		$space: 30px;
+		padding-left: $space; padding-right: $space;
+	}
+	&-clean, &-initial { padding: initial; border: nowne; box-shadow: none; background: transparent; }
+	&-initial { max-width: initial; width: initial; }
+	&-reset { width: initial; }
+	&-fit { width: fit-content; }
+	&-fw { width: inherit; }
+	&:hover { filter: brightness(1.1); }
+}
+
+.form { margin: 0; padding: 0; display: flex; flex-direction: column;
+	textarea { resize: vertical; }
+	.form-field { margin-bottom: 20px;
+		&:last-child:first-child {
+			> * { margin-bottom: 0; }
+		}
+
+		&.flex-h {
+			& > * { margin-right: 20px; max-width: 50%; width: 100%;
+				&:last-child { margin-right: 0; }
+			}
+		}
+		& .form-field-checkbox { position: relative; display: block;
+			$outline: #6a8072;
+			$innerline: #a2c1ad;
+
+			input[type="checkbox"] { opacity: 0; width: 0; height: 0;
+				&:checked ~ .field-checkbox-marker { border-color: $outline; background: $innerline;
+					> * { opacity: 1; }
+				}
+			}
+			.field-checkbox-marker { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); color: $outline; background: $bgSecondary; width: 24px; height: 24px; border: 1px solid $bgTertiary;
+				> * { padding: 4px; opacity: 0; }
+				&:hover { cursor: pointer; }
+			}
+		}
+		&:last-child { margin-bottom: 0; }
+		> *:first-child:last-child { max-width: 100%; width: 100%; }
+	}
+	.form-title { padding: 10px; background: #b2bec3; box-sizing: border-box; border-top: 1px dashed #2d3436; color: #2d3436; }
+	.form-field-header { padding: 9px 0; border-left: 2px solid #333; border-bottom: 1px dashed #333; background: #fff; box-sizing: border-box;
+		& > * { margin-bottom: 5px; padding: 0 10px; box-sizing: border-box;
+			&:last-child { margin-bottom: 0; }
+		} 
+	}
+	.form-field-wrapper { box-sizing: border-box; }
+	.form-field-description {
+		p, span { font-size: 12px; font-style: italic; color: #6c6c6c; }
+	}
+
+	// field adjustments
+	input[type="color"] { padding: 2px 4px; width: 45px; height: 23px; box-sizing: content-box; }
+
+	// required
+	input[required], select[required], textarea[required] { border-left: 2px solid $bgErrorColor; }
+
+	button[type="submit"] { align-self: flex-end; }
+
+	&:last-child { margin-bottom: 0; }
+}

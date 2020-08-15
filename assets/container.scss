@@ -1,0 +1,68 @@
+// col-12 system
+.col { width: 100%;
+	&-12 { max-width: 100%; } &-11 { max-width: 91.66%; } &-10 { max-width: 83.33%; } &-9 { max-width: 75%; }
+	&-8 { max-width: 66.67%; } &-7 { max-width: 58.33%; } &-6 { max-width: 50%; } &-5 { max-width: 41.66%; }
+	&-4 { max-width: 33.33% } &-3 { max-width: 25%; } &-2 { max-width: 16.67%; } &-1 { max-width: 8.33%; }
+}
+
+.container { margin-bottom: 20px;
+	&-box { margin-bottom: 20px; padding: 10px 15px; background: #2d3436; box-sizing: border-box; color: #dfe6e9; background: #2d3436;
+		$transAmount: 0.65;
+		
+		&.regular &.ok, &.error, &.warning, &.info { border: 1px solid #2d3436; border-left-width: 5px; background: #fff; color: #2d3436; }
+		&.ok { background: transparentize($okColor, $transAmount); border-color: $okColor; }
+		&.error { background: transparentize($errorColor, $transAmount); border-color: $errorColor; }
+		&.warning { background: transparentize($warningColor, $transAmount); border-color: $warningColor; }
+		&.info { background: transparentize($infoColor, $transAmount); border-color: $infoColor; }
+		& + & { margin-bottom: 5px; }
+		&:last-child { margin-bottom: 0; }
+	}
+	&-center { margin-left: auto; margin-right: auto; }
+	&-vertical { padding: 0 20px; }
+	&-expander { padding: 7px 14px; box-sizing: border-box; }
+	&-spaceout { $space: 20px; margin: $space;
+		&-v { margin-top: $space; margin-bottom: $space;
+			& + & { margin-top: 0; }
+		}
+		&-h { margin-left: $space; margin-right: $space;
+			& + & { margin-left: 0; }
+		}
+	}
+	&-reveal:hover .hide { opacity: 1; display: inherit; }
+	&-grid { display: grid;
+		& .left-side { width: 50%; }
+		& .right-side { width: 50%; }
+	}
+
+	&:last-child { margin-bottom: 0; }
+}
+
+.close { padding: 8px 12px; background: $errorColor; cursor: pointer; color: $bgPrimary; }
+.onhover-container {
+	& .onhover { opacity: 0; }
+	&:hover {
+		.onhover { opacity: 1; }
+	}
+}
+
+.padding {
+	&-v { padding: 10px 0; }
+	&-h { padding: 0 10px; }
+	padding: 10px;
+}
+
+.batch {
+	padding: 2px 10px;
+	background: $bgPrimaryComp;
+	color: $bgTertiary;
+	border-radius: 2px;
+	border: 2px outset $bgPrimaryComp;
+	font-family: "Source Sans Pro";
+	font-size: 12px;
+	font-weight: 600;
+	white-space: nowrap;
+	box-sizing: border-box;
+	&-normal {
+		font-size: inherit;
+	}
+}

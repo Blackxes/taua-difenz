@@ -1,0 +1,21 @@
+@import "./variables.scss";
+@import "./functionalities.scss";
+@import "./root.scss";
+@import "./listing.scss";
+@import "./form.scss";
+@import "./container.scss";
+@import "./text.scss";
+
+body { background: #dfe6e9; }
+
+#app { margin: 0 auto; padding: 50px 20px 100px; max-width: 720px; }
+
+/* Todo: temporarly done make it more nice */
+#app .selected-attributes-list {
+	.remove-from-selected-title { margin-bottom: 0; }
+	.remove-from-selected-trigger { padding: 6px 10px; width: fit-content; font-size: 12px; }
+}
+
+.form-character-sheet {
+	.attribute-value { border: 1px solid #636e72; background: #dfe6e9; }
+}

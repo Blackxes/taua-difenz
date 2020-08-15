@@ -1,0 +1,179 @@
+// Todo: remake flex, list, etc rules and make them more clear
+// implement different list types
+// all types inherit from the flex main rules but have different behaviour on their own
+// children of flex container should have children with a list-item class
+// - flex - acts as a simple flex box without special behaviour
+// - list - adds spacing between list-item's
+// - item-list - same as list - adds border between list-item's
+// - compact-list - same as list - reduced spacing between list-item's
+
+// special types
+// - menu - 
+
+// simple flex without spacing
+.flex, .list { display: flex; flex-direction: row;
+	&-inline { display: inline-flex; width: initial; }
+	// & > * { margin-right: 10px;
+	// 	&:last-child { margin-right: 0; }
+	// }
+	&-v { flex-direction: column; width: initial;
+		& > .list-item { width: 100%; margin-bottom: 0.5rem; margin-right: 0;
+			&:last-child { margin-bottom: 0; }
+		}
+	}
+	&-h { flex-direction: row; width: 100%;
+		& > .list-item { margin-bottom: 0; margin-right: 0.5rem; width: fit-content;
+			&.item-max { width: inherit; }
+			&:last-child { margin-right: 0; }
+		}
+	}
+	.list-item {
+		&.mtb { margin-top: 20px; margin-bottom: 20px; }
+		&.mb { margin-bottom: 20px; }
+		&.mn  { margin-top: 0; margin-bottom: 0; }
+		&.fit { width: fit-content; }
+		&.end { justify-content: flex-end; }
+	}
+
+	&-start { align-self: flex-start; }
+	&-align { align-items: center; }
+	&-justify { justify-content: center; }
+	&-end { margin-left: auto; }
+	&-inset {
+		& > .list-item { padding-left: 5px; padding-right: 5px; }
+	}
+	&-item-box {
+		& > .list-item { padding: 10px; background: #fff; border: 1px solid #b2bec3; }
+	}
+	&-spaced {
+		& > * { margin-right: 30px; }
+		&.flex-v {
+			& > { margin-bottom: 30px; }
+		}
+	}
+	&-nospace {
+		&.flex-v > .list-item { margin-bottom: 0; }
+		&.flex-h > .list-item { margin-right: 0; }
+	}
+	&-fill {
+		& > .list-item { flex: 1 1 0; }
+	}
+	&-wrap { flex-wrap: wrap; }
+	&-space-between { justify-content: space-between; }
+}
+
+// same as flex but grid
+.grid { display: grid; grid-gap: 10px;
+	& > * { margin: 0; }
+	&-v { grid-auto-flow: row; }
+	&-h { grid-auto-flow: column; }
+	&-nogap { grid-gap: 0; }
+	&-inline { display: inline-grid; }
+	&-align { align-items: center; }
+	&-justify { justify-content: center; }
+	&-2 { grid-template-columns: repeat(2, 1fr); }
+	&-3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+// flex but with spacing and more like an item listing where each list item
+// can have a title element and a list item container where the actual content of a list item lays
+// list items itself are raw without spacing except when you add
+// the .list-spacing class which adds spacing to the .list-item
+// elements one level beneath the .list element
+.list { margin: 0; padding: 0; display: flex; flex-direction: row;
+	.list-item { margin-right: 10px; padding: 10px 15px; box-sizing: border-box; background: #fff; border-bottom: 1px solid #2d3436;
+		& .list-item { padding: 0; border-bottom: none; }
+		&:hover { background: #b2bec3; color: #fff; }
+		&:last-child { margin-right: 0; }
+	}
+	&-v { flex-direction: column;
+		.list-item { margin-right: 0; margin-bottom: 0; width: 100%;
+			&:last-child { margin-bottom: 0; }
+		}
+	}
+	&-h {
+		.list-item { margin-bottom: 0; }
+	}
+	&-nohover .list-item:hover { background: inherit; }
+	&-spaced { margin-right: 30px;
+		&.list-v { margin-right: 0; margin-bottom: 30px; }
+	}
+	&-selectable {
+		.list-item { cursor: pointer; }
+	}
+	&-simple {
+		.list-item { padding: 0; border: none; }
+	}
+	&-fill {
+		.list-item { flex: 1;
+			& > .list-item { flex: initial; }
+		}
+	}
+}
+
+// .item-list, .list { margin: 0; padding: 0; display: flex; flex-direction: column;
+// 	&-header { margin-bottom: 10px; display: flex; flex-direction: row; align-items: center; background: #222; border-bottom: 2px solid #111; }
+// 	&-container { margin: 0; padding: 0; display: flex; flex-direction: column;
+// 		.header-item { margin: 0; padding: 5px 10px; }
+// 	}
+// 	&-item { margin-bottom: 10px; padding: 5px 10px; box-sizing: border-box;
+// 		&-clean { padding: 0;
+// 			&-v { padding-left: 0; padding-right: 0; }
+// 			&-h { padding-top: 0; padding-bottom: 0; }
+// 		}
+// 		&-raw { margin: 0; padding: 0; }
+// 		&:last-child { margin-bottom: 0; }
+// 	}
+// 	&-clean-items {
+// 		& > .list-item { margin: 0; padding: 0; }
+// 		&-v > .list-item { padding-left: 0; padding-right: 0; }
+// 		&-h > .list-item { padding-top: 0; padding-bottom: 0; }
+// 	}
+// 	&-h { flex-direction: row;
+// 		& > .list-item { margin-bottom: 0; }
+// 	}
+
+// 	&-grid { display: grid; grid-auto-flow: row;
+// 		&-h { grid-auto-flow: column;
+// 			& > .list-item { margin-bottom: 0; }
+// 		}
+// 	}
+// }
+
+// .item-list {
+// 	$spacing: 30px;
+// 	.list-item { padding-left: $spacing; padding-right: $spacing; }
+// }
+
+.menu-container { display: flex; flex-direction: column;
+	.menu-title { margin-bottom: 5px; padding: 5px 10px; background: $bgSecondary; font-size: 18px; }
+	.menu-group { padding: 0 10px;
+		&:first-child { padding-left: 0; }
+	}
+	.menu-items { display: inline-flex; flex-direction: column;
+		&.flex-h { flex-direction: row;
+			& .menu-item { margin-bottom: 0; margin-right: 5px;
+				&:last-child { margin-right: 0; }
+			}
+		}
+	}
+	.menu-item { margin-bottom: 5px; padding: 0; align-items: center; width: fit-content; border-bottom: 2px inset $bgTertiary; cursor: pointer; transition: all 0.1s linear;
+		&.item-box { background: $bgMenuColor; }
+		a { padding: 0 10px; text-decoration: none; display: flex; flex-direction: row; align-items: center; justify-content: center; border-bottom: 2px solid transparent;
+			&.active { border-bottom-color: $bgMenuColorActive; }
+			& > * { margin-right: 0; padding: 5px; transition: all 0.1s linear; }
+			svg { padding: 8px 0px; }
+		}
+		&:hover { background: $bgSecondary2;
+			.menu-title-prefix { padding-left: 7px; padding-right: 3px; }
+		}
+		&:last-child { margin-bottom: 0; }
+	}
+
+	&.menu-horizontal { flex-direction: row;
+		.menu-items { display: flex; flex-direction: row; }
+		.menu-item { margin-right: 5px; margin-bottom: 0; border: none;
+			&:last-child { margin-right: 0; }
+		}
+	}
+}

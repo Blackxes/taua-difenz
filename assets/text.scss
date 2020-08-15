@@ -1,0 +1,24 @@
+.text {
+	&-sub { font-size: 0.75rem; font-style: italic; color: #6c6c6c; }
+	&-super { font-size: 1.25rem; }
+	&-dark { color: $bgTertiary; }
+	&-center { text-align: center; }
+	&-reverse { background: $bgPrimaryComp; color: #000; }
+	&-title { padding: 10px 15px; display: inline-block; font-size: 18px; color: #dfe6e9; background: #2d3436; }
+	&-shortened { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+	&-nowrap { white-space: nowrap; }
+	&-info { font-style: italic; }
+	&-divider { padding: 0 10px; }
+}
+
+.msg {
+	&-ok { color: $okColor !important; }
+	&-error { color: $errorColor !important; }
+	&-warning { color: $warningColor !important; }
+	&-info { color: $infoColor !important; }
+}
+
+.value {
+	&-true { color: $okColor; }
+	&-false { color: $errorColor; }
+}

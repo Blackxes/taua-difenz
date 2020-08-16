@@ -82,3 +82,15 @@ declare interface ShopItemProps {
     item: ShopItem;
     onPurchase: Function;
 }
+
+declare interface LevelInventoryItem {
+    id: string;
+    // Todo: define item type / implement inventory item type
+    item: any;
+    group?: string;
+    order?: number;
+}
+
+declare interface LevelInventoryProps {
+    items: Array<any>;
+}

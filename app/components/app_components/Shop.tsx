@@ -14,9 +14,11 @@ import { faCoins as fasCoins } from '@fortawesome/free-solid-svg-icons';
 import FlexContainer from '../system_components/Container/FlexContainer';
 import { Button } from '../system_components/Trigger/Button';
 import { Paragraph, InlineParagraph } from '../system_components/text/Text';
+import { ShopContainerWidth } from '../../logic/configurations';
 
 const StyledShop = styled.div`
-    width: 100%;
+    width: ${(props) => ShopContainerWidth}px;
+    height: 100vh;
 `;
 
 const StyledShopItem = styled.div`

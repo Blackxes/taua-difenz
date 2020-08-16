@@ -6,13 +6,30 @@
  */
 
 import * as React from 'react';
+import styled from 'styled-components';
 
 import Field from './Field';
 import Shop from './Shop';
 
 import { TestDataField, TestDataShop } from '../../TestData';
+import LevelInventory from './LevelInventory';
 
 const LevelContext = React.createContext<LevelContextState>({});
+
+const StyledLevel: React.FC = styled.div`
+    display: flex;
+    width: 100%;
+`;
+
+/**
+ * component to set the full width without interfering
+ * with the width calculations of the field component
+ */
+const StyledFieldWrapper: React.FC = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+`;
 
 class Level extends React.Component<LevelProps, LevelState> {
     constructor(props) {
@@ -38,37 +55,46 @@ class Level extends React.Component<LevelProps, LevelState> {
         });
     };
 
-    onHoldItem = (itemId: string) => {
+    onHoldItem = (evt: React.DragEvent, itemId: string) => {
         this.setState({
             focusedShopItemId: itemId
         });
     };
 
-    onDropItem = (itemId: string) => {
+    onDropItem = (evt: React.DragEvent, itemId: string) => {
         this.setState({
             focusedFieldTile: null,
             focusedShopItemId: ''
         });
     };
 
-    onFocusFieldTile = (evt, fieldIndex: number) => {
+    onFocusFieldTile = (evt: React.DragEvent, fieldIndex: number) => {
         this.setState({
             focusedFieldTile: fieldIndex
         });
     };
 
+    onResetFieldTileFocus = (evt: React.DragEvent) => {
+        this.setState({
+            focusedFieldTile: null
+        });
+    };
+
     render() {
         return (
-            <React.Fragment>
-                <Field {...TestDataField} onFieldTileFocus={this.onFocusFieldTile} />
+            <StyledLevel>
+                <LevelInventory items={this.state.purchasedItems} />
+                <StyledFieldWrapper>
+                    <Field {...TestDataField} onFieldTileFocus={this.onFocusFieldTile} />
+                </StyledFieldWrapper>
                 <Shop
                     {...TestDataShop}
                     onPurchaseItem={this.onPurchaseItem}
                     onHoldItem={this.onHoldItem}
                     onDropItem={this.onDropItem}
                 />
-                <pre>{JSON.stringify(this.state, undefined, 2)}</pre>
-            </React.Fragment>
+                {/* <pre>{JSON.stringify(this.state, undefined, 2)}</pre> */}
+            </StyledLevel>
         );
     }
     // const [holdingItem, setHoldingItem] = React.useState<string>(null);

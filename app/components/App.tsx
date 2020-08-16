@@ -16,8 +16,6 @@ import {
 import BackgroundImage from './app_components/BackgroundImage';
 
 const StyledApp = styled.div`
-    margin: 0 auto;
-    padding: 50px 0;
     display: flex;
     flex-direction: column;
     max-width: ${(props: any) => props.appWidth}px;

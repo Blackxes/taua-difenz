@@ -11,5 +11,8 @@ import ApplicationBody from '../components/app_components/ApplicationBody';
 export const ApplicationHeaderComponent = ApplicationHeader;
 export const ApplicationBodyComponent = ApplicationBody;
 
-export const AppWidth: number = 980;
+export const AppWidth: number = 1920;
 export const FontFamily: string = 'Roboto';
+
+export const LevelInventoryContainerWidth = 200;
+export const ShopContainerWidth = 200;

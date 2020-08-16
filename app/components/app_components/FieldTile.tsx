@@ -60,7 +60,9 @@ const FieldTypesConfiguration = {
 };
 
 const FieldTile: React.FC<FieldTileProps> = (props) => {
-    const FieldComponent = FieldTypesConfiguration[props.type.toLowerCase()] || StyledFieldTileBase;
+    const FieldComponent =
+        FieldTypesConfiguration[(props.type && props.type.toLowerCase()) || 'grass'] ||
+        StyledFieldTileBase;
 
     return (
         <React.Fragment>

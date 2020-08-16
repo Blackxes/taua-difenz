@@ -10,29 +10,37 @@ import styled, { css } from 'styled-components';
 import FieldTile from './FieldTile';
 import { getParsedFieldDesign } from '../../logic/source/fieldFunctions';
 
-const calculateFieldWidth = (baseFieldWidth: number, columnsCount: number, tileSpacing: number) =>
-    baseFieldWidth + (columnsCount + 1) * tileSpacing || 1;
-const calculateFieldHeight = (baseFieldHeight: number, rowsCount: number, tileSpacing: number) =>
-    baseFieldHeight + (rowsCount + 1) * tileSpacing || 1;
-const calculateFieldTileWidth = (baseFieldWidth: number, columnsCount: number) =>
-    baseFieldWidth / columnsCount;
-const calculateFieldTileHeight = (baseFieldWidth: number, rowsCount: number) =>
-    baseFieldWidth / rowsCount;
+const calculateFieldTileWidth = (
+    baseFieldWidth: number,
+    columnsCount: number,
+    tileSpacing: number
+) => (baseFieldWidth - (columnsCount + 1) * tileSpacing) / columnsCount;
+
+const calculateFieldTileHeight = (
+    baseFieldHeight: number,
+    rowsCount: number,
+    tileSpacing: number
+) => (baseFieldHeight - (rowsCount + 1) * tileSpacing) / rowsCount;
 
 const StyledFieldContainer: React.FC<FieldProps> = styled.div`
     padding: ${(props: FieldProps) => props.tileSpacing || 1}px;
-    width: ${(props: FieldProps) =>
-        calculateFieldWidth(props.fieldWidth, props.columnsCount, props.tileSpacing)}px;
-    height: ${(props: FieldProps) =>
-        calculateFieldHeight(props.fieldHeight, props.rowsCount, props.tileSpacing)}px;
+    width: ${(props: FieldProps) => props.fieldWidth}px;
+    height: ${(props: FieldProps) => props.fieldHeight}px;
     display: grid;
     grid-gap: ${(props: FieldProps) => props.tileSpacing || 1}px;
     grid-auto-flow: row;
-	${({ fieldWidth, fieldHeight, columnsCount, rowsCount }: FieldProps) =>
+	${({ fieldWidth, fieldHeight, columnsCount, rowsCount, tileSpacing }: FieldProps) =>
         css`
             grid-template:
-                repeat(${rowsCount}, ${calculateFieldTileWidth(fieldHeight, columnsCount)}px) /
-                repeat(${columnsCount}, ${calculateFieldTileHeight(fieldWidth, rowsCount)}px);
+                repeat(
+                    ${rowsCount},
+                    ${calculateFieldTileHeight(fieldHeight, rowsCount, tileSpacing)}px
+                )
+                /
+                repeat(
+                    ${columnsCount},
+                    ${calculateFieldTileWidth(fieldWidth, columnsCount, tileSpacing)}px
+                );
         `}
 	}
     align-content: center;

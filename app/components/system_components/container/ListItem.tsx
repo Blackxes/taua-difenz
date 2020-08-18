@@ -8,10 +8,7 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 
-interface Props {
-    align?: string;
-    justify?: string;
-}
+const ListItem: React.FC<ListItemProps> = (props) => <StyledListItem {...props} />;
 
 const StyledListItem = styled.div`
     ${(props: any) =>
@@ -25,9 +22,5 @@ const StyledListItem = styled.div`
             justify-self: ${props.justify};
         `}
 `;
-
-const ListItem: React.FC<Props> = (props) => {
-    return <StyledListItem {...props} />;
-};
 
 export default ListItem;

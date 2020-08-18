@@ -7,6 +7,10 @@
  */
 
 declare interface AppProps {}
+declare interface ApplicationHeaderWrapperProps {
+    title?: string;
+}
+declare interface ApplicationBodyWrapperProps {}
 
 declare interface BackgroundImageProps {
     image?: string;
@@ -17,6 +21,23 @@ declare interface FlexContainerProps {
     margin?: number;
     justify?: boolean | string;
     align?: boolean | string;
+}
+
+declare interface GridContainerProps {
+    vertical?: boolean;
+    gap?: number;
+    template?: string;
+    // fallback value when columns/rows is not defined
+    count?: number;
+    columns?: number;
+    rows?: number;
+    // unit used for the width of each item // default is 1fr
+    unit?: number;
+}
+
+declare interface ListItemProps {
+    align?: string;
+    justify?: string;
 }
 
 declare type ButtonTypes = 'regular' | 'ok' | 'error' | 'warning' | 'info' | 'submit';

@@ -14,5 +14,5 @@ export const ApplicationBodyComponent = ApplicationBody;
 export const AppWidth: number = 1920;
 export const FontFamily: string = 'Roboto';
 
-export const LevelInventoryContainerWidth = 200;
-export const ShopContainerWidth = 200;
+export const LevelInventoryContainerWidth = 300;
+export const ShopContainerWidth = 400;

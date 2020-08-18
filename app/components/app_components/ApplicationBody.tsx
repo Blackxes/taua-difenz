@@ -11,7 +11,15 @@ import styled from 'styled-components';
 
 import Level from './Level';
 
-const StyledApplicationBody = styled.div`
+const ApplicationBody: React.FC<ApplicationBodyProps> = (props) => {
+    return (
+        <StyledApplicationBody>
+            <Level />
+        </StyledApplicationBody>
+    );
+};
+
+const StyledApplicationBody: React.FC = styled.div`
     display: flex;
     > * {
         margin-right: 20px;
@@ -20,13 +28,5 @@ const StyledApplicationBody = styled.div`
         }
     }
 `;
-
-const ApplicationBody: React.FC<ApplicationBodyProps> = (props) => {
-    return (
-        <StyledApplicationBody>
-            <Level />
-        </StyledApplicationBody>
-    );
-};
 
 export default ApplicationBody;

@@ -13,47 +13,7 @@ import { faCoins as fasCoins } from '@fortawesome/free-solid-svg-icons';
 
 import FlexContainer from '../system_components/Container/FlexContainer';
 import { Button } from '../system_components/Trigger/Button';
-import { Paragraph, InlineParagraph } from '../system_components/text/Text';
 import { ShopContainerWidth } from '../../logic/configurations';
-
-const StyledShop = styled.div`
-    width: ${(props) => ShopContainerWidth}px;
-    height: 100vh;
-`;
-
-const StyledShopItem = styled.div`
-    padding: 10px;
-    background: #423a34;
-`;
-
-const StyledItemTitle = styled.p`
-    margin: 0;
-    font-size: 20px;
-    algin-self: start;
-`;
-
-const StyledItemIcon = styled.img`
-    margin-left: auto;
-    width: 32px;
-    height: min-content;
-`;
-
-const StyledCost = styled.p`
-    font-size: 14px;
-`;
-
-const StyledCostIcon = styled(FontAwesomeIcon)`
-    width: 100%;
-    font-size: 12px;
-`;
-
-const StyledCoinsIcon = styled(StyledCostIcon)`
-    color: gold;
-`;
-
-const StyledCrystalsIcon = styled(StyledCostIcon)`
-    color: aquamarine;
-`;
 
 const Shop: React.FC<ShopProps> = (props) => {
     return (
@@ -95,5 +55,46 @@ const Shop: React.FC<ShopProps> = (props) => {
         </StyledShop>
     );
 };
+
+const StyledShop = styled.div`
+    min-width: ${(props) => ShopContainerWidth}px;
+    height: 100vh;
+    border-left: 10px solid #4c413a;
+    background: #14100f80;
+`;
+
+const StyledShopItem = styled.div`
+    padding: 10px;
+    background: #423a34;
+`;
+
+const StyledItemTitle = styled.p`
+    margin: 0;
+    font-size: 20px;
+    algin-self: start;
+`;
+
+const StyledItemIcon = styled.img`
+    margin-left: auto;
+    width: 32px;
+    height: min-content;
+`;
+
+const StyledCost = styled.p`
+    font-size: 14px;
+`;
+
+const StyledCostIcon = styled(FontAwesomeIcon)`
+    width: 100%;
+    font-size: 12px;
+`;
+
+const StyledCoinsIcon = styled(StyledCostIcon)`
+    color: gold;
+`;
+
+const StyledCrystalsIcon = styled(StyledCostIcon)`
+    color: aquamarine;
+`;
 
 export default Shop;

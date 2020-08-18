@@ -8,17 +8,7 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 
-interface Props {
-    vertical?: boolean;
-    gap?: number;
-    template?: string;
-    // fallback value when columns/rows is not defined
-    count?: number;
-    columns?: number;
-    rows?: number;
-    // unit used for the width of each item // default is 1fr
-    unit?: number;
-}
+const GridContainer: React.FC<GridContainerProps> = (props) => <StyledGridContainer {...props} />;
 
 const StyledGridContainer = styled.div`
     display: grid;
@@ -41,9 +31,5 @@ const StyledGridContainer = styled.div`
     `}
     align-items: center;
 `;
-
-const GridContainer: React.FC<Props> = (props) => {
-    return <StyledGridContainer {...props} />;
-};
 
 export default GridContainer;

@@ -10,7 +10,7 @@ import styled from 'styled-components';
 
 const Background = import('../../../Assets/Images/bg.jpg');
 
-const StyledBackgroundImage = styled.div`
+const StyledBackgroundImage: React.FC = styled.div`
 	min-height: 100vh;
 	height: 100%;
 	background: #1e1916 fixed repeat-y url('${(props: BackgroundImageProps) => props.image || ''}');

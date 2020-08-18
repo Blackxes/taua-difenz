@@ -27,7 +27,7 @@ const handleLinkTypeColor: Function = (type: ButtonTypes) => {
     }
 };
 
-const StyledLink = styled(NavLink)`
+const StyledLink: React.FC<LinkProps> = styled(NavLink)`
     text-decoration: underline;
     :hover {
         color: inherit;

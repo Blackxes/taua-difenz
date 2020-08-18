@@ -14,18 +14,14 @@ import styled from 'styled-components';
 
 import ApplicationBody from '../../app_components/ApplicationBody';
 
+const ApplicationBodyWrapper: React.FC<ApplicationBodyWrapperProps> = (props) => (
+    <StyledApplicationBody>
+        <ApplicationBody {...props} />
+    </StyledApplicationBody>
+);
+
 const StyledApplicationBody = styled.main`
     display: flex;
 `;
-
-interface Props {}
-
-const ApplicationBodyWrapper: React.FC<Props> = (props) => {
-    return (
-        <StyledApplicationBody>
-            <ApplicationBody {...props} />
-        </StyledApplicationBody>
-    );
-};
 
 export default ApplicationBodyWrapper;
